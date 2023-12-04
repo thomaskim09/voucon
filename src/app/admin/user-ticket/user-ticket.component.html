@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Check User Ticket</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content overflow-scroll='true'>
+  <ion-grid class='grid'>
+    <form [formGroup]='form'>
+      <ion-row>
+        <ion-col>
+          <ionic-selectable class='select-box' placeholder="Pick a user" formControlName='userId' [items]="userPorts"
+            itemValueField="id" itemTextField="name" [canSearch]="true">
+          </ionic-selectable>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
+
+  <ion-grid *ngIf='ticketList' class='grid'>
+    <ion-row>
+      <ion-col class='number'>Current {{ticketList?.length}} ticket records</ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-list>
+    <ion-item *ngFor='let item of ticketList'>
+      <ion-label class='left'>{{item.name}}</ion-label>
+      <ion-label class='right' slot="end">{{item.createdTime}}
+        <span class='status'>({{item.status}})</span>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll [disabled]="disableInfiniteScroll" threshold="100px" (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more content...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+
+<ion-footer>
+  <form [formGroup]='form'>
+    <ion-grid>
+      <ng-container>
+        <ion-row>
+          <ion-col>
+            <ion-button [disabled]='!form.valid' (click)='getList()' color="primary" expand="full" shape='round'>
+              Get Tickets List</ion-button>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+    </ion-grid>
+  </form>
+</ion-footer>

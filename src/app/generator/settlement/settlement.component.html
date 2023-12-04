@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Generate Mass Settlement</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content overflow-scroll='true'>
+  <ion-grid class='grid'>
+    <form [formGroup]='form'>
+      <ion-row>
+        <ion-col>
+          <ion-select class='select-box' placeholder="Month" formControlName='month'>
+            <ion-select-option value="L2M">Last 2 Month</ion-select-option>
+            <ion-select-option value="LM">Last Month</ion-select-option>
+            <ion-select-option value="TM">This Month</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <ng-container *ngIf='form.value.month'>
+        <ion-row>
+          <ion-col>
+            <ion-select class='select-box' placeholder="Duration" formControlName='duration'>
+              <ion-select-option value="WM">Whole Month</ion-select-option>
+              <ion-select-option value="F2">First 2 Weeks</ion-select-option>
+              <ion-select-option value="L2">Last 2 Weeks</ion-select-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+      <ion-row>
+        <ion-col>
+          <ion-input readonly class='input-box' placeholder="Start Date" formControlName='startDate'
+            (click)='showStartPicker()'></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input readonly class='input-box' placeholder="End Date" formControlName='endDate'
+            (click)='showEndPicker()'>
+          </ion-input>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
+
+</ion-content>
+
+<ion-footer>
+  <form [formGroup]='form'>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button [disabled]='!form.valid' (click)='generateExcel()' color="primary" expand="full" shape='round'>
+            <ng-container *ngIf='needSpinner'>
+              <ion-spinner></ion-spinner>
+            </ng-container>
+            <ng-container *ngIf='!needSpinner'>
+              Generate Documents
+            </ng-container>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-footer>

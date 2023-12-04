@@ -1,0 +1,150 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Addresses Modify</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content overflow-scroll='true'>
+  <form [formGroup]='form'>
+    <ion-grid class='grid'>
+      <ion-row>
+        <ion-col>
+          <ion-select class='select-box' placeholder="Type" formControlName='type'>
+            <ion-select-option value="state">State</ion-select-option>
+            <ion-select-option value="city">City</ion-select-option>
+            <ion-select-option value="postcode">Postcode</ion-select-option>
+            <ion-select-option value="area">Area</ion-select-option>
+            <ion-select-option value="place">Place</ion-select-option>
+            <ion-select-option value="street">Street</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-select class='select-box' placeholder="Action" formControlName='action'>
+            <ion-select-option value="add">Add</ion-select-option>
+            <ion-select-option value="rename">Rename</ion-select-option>
+            <ion-select-option value="delete">Delete</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+
+      <ng-container *ngIf='needState'>
+        <ion-row>
+          <ion-col>
+            <ionic-selectable class='select-box' placeholder="Pick a State" formControlName="statePort"
+              [items]="statePorts" itemValueField="id" itemTextField="name" [canSearch]="true">
+            </ionic-selectable>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+      <ng-container *ngIf='needCity'>
+        <ion-row>
+          <ion-col>
+            <ionic-selectable class='select-box' placeholder="Pick a City" formControlName="cityPort"
+              [items]="cityPorts" itemValueField="id" itemTextField="name" [canSearch]="true"
+              (onChange)="cityPortChange($event)">
+            </ionic-selectable>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+      <ng-container *ngIf='needPostcode'>
+        <ion-row>
+          <ion-col>
+            <ionic-selectable class='select-box' placeholder="Pick a Postcode" formControlName="postcodePort"
+              [items]="postcodePorts" itemValueField="id" itemTextField="name" [canSearch]="true">
+            </ionic-selectable>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+      <ng-container *ngIf='needArea'>
+        <ion-row>
+          <ion-col>
+            <ionic-selectable class='select-box' placeholder="Pick a Area" formControlName="areaPort"
+              [items]="areaPorts" itemValueField="id" itemTextField="name" [canSearch]="true">
+            </ionic-selectable>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+      <ng-container *ngIf='needPlace'>
+        <ion-row>
+          <ion-col>
+            <ionic-selectable class='select-box' placeholder="Pick a Place" formControlName="placePort"
+              [items]="placePorts" itemValueField="id" itemTextField="name" [canSearch]="true">
+            </ionic-selectable>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+      <ng-container *ngIf='needStreet'>
+        <ion-row>
+          <ion-col>
+            <ionic-selectable class='select-box' placeholder="Pick a Street" formControlName="streetPort"
+              [items]="streetPorts" itemValueField="id" itemTextField="name" [canSearch]="true">
+            </ionic-selectable>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+
+      <div class='content'>
+        <ng-container *ngIf="form.controls.action.value === 'add'">
+          <ion-row>
+            <ion-col>
+              <ion-input class='input-box' placeholder="New Item" formControlName='add'></ion-input>
+            </ion-col>
+          </ion-row>
+        </ng-container>
+        <ng-container *ngIf="form.controls.action.value === 'rename'">
+          <ion-row>
+            <ion-col>
+              <ion-input class='input-box' placeholder="Rename name" formControlName='rename'></ion-input>
+            </ion-col>
+          </ion-row>
+        </ng-container>
+      </div>
+
+      <ng-container *ngIf="form.controls.action.value !== 'delete' && form.controls.type.value === 'city'">
+        <div class='content'>
+          <ion-row>
+            <ion-col>
+              <ion-input class='input-box' placeholder="City Short Name" formControlName='shortName'></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-list class='list'>
+                <ion-item>
+                  <ion-label class='checkbox-label'>is Default City</ion-label>
+                  <ion-checkbox slot="end" formControlName="isDefault"></ion-checkbox>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-input class='input-box' type='number' placeholder="Longitude" formControlName='longitude'>
+              </ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-input class='input-box' type='number' placeholder="Latitude" formControlName='latitude'></ion-input>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ng-container>
+    </ion-grid>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <form [formGroup]='form'>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button [disabled]='!form.valid' (click)='confirm()' color="primary" expand="full" shape='round'>Start
+            Action</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-footer>

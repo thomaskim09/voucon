@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Treats & Tips</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content overflow-scroll='true'>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+    <ion-item *ngFor='let item of treatList' (click)='viewTreat(item._id)'>
+      <ion-label class='title'>RM{{item.details.amount}} ({{item.details.treatType}}) - {{item.details.content}}
+      </ion-label>
+      <ion-label class='end' slot="end">{{getTime(item.createdTime)}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll [disabled]="disableInfiniteScroll" threshold="100px" (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more content...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

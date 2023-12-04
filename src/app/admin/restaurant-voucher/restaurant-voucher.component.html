@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Change restaurant & voucher status</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content overflow-scroll='true'>
+  <form [formGroup]='form'>
+    <ion-grid class='grid'>
+      <ion-row>
+        <ion-col>
+          <ion-select class='select-box' placeholder="Type" formControlName='type'>
+            <ion-select-option value="restaurants">Restaurants</ion-select-option>
+            <ion-select-option value="vouchers">Vouchers</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid class='grid'>
+      <ion-row>
+        <ion-col>
+          <ionic-selectable class='select-box' placeholder="Pick a Restaurant" formControlName='restaurantId'
+            [items]="resPorts" itemValueField="id" itemTextField="name" [canSearch]="true">
+          </ionic-selectable>
+        </ion-col>
+      </ion-row>
+      <ng-container *ngIf='isVoucherOnly'>
+        <ion-row>
+          <ion-col>
+            <ion-select class='select-box' placeholder="Voucher Status Type" formControlName='statusType'>
+              <ion-select-option value="active">Active - except CL</ion-select-option>
+              <ion-select-option value="history">History - CL</ion-select-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ionic-selectable class='select-box' placeholder="Pick a Voucher" formControlName='voucherId'
+              [items]="vouPorts" itemValueField="id" itemTextField="name" [canSearch]="true">
+            </ionic-selectable>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+      <ion-row>
+        <ion-col>
+          <ion-select class='select-box' placeholder="Status" formControlName='status'>
+            <ng-container *ngIf='!isVoucherOnly'>
+              <ion-select-option value="OP">Open - OP</ion-select-option>
+              <ion-select-option value="CL">Close - CL</ion-select-option>
+              <ion-select-option value="HD">Hidden - HD</ion-select-option>
+              <ion-select-option value="NP">No Voucher - NP</ion-select-option>
+            </ng-container>
+            <ng-container *ngIf='isVoucherOnly'>
+              <ion-select-option value="OP">Open - OP</ion-select-option>
+              <ion-select-option value="HD">Hidden - HD</ion-select-option>
+              <ion-select-option value="CL">Close - CL</ion-select-option>
+              <ion-select-option value="OP">WaitForGrab - WG</ion-select-option>
+              <ion-select-option value="OP">LimitTimeOver - LO</ion-select-option>
+              <ion-select-option value="HD">SoldOut - SO</ion-select-option>
+              <ion-select-option value="CL">Expired - EX</ion-select-option>
+            </ng-container>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <form [formGroup]='form'>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ng-container *ngIf='!isVoucherOnly'>
+            <ion-button (click)='updateRestaurantStatus()' color="primary" expand="full" shape='round'
+              [disabled]='!form.valid'>Update Restaurant's Status</ion-button>
+          </ng-container>
+          <ng-container *ngIf='isVoucherOnly'>
+            <ion-button (click)='updateVoucherStatus()' color="secondary" expand="full" shape='round'
+              [disabled]='!form.valid'>Update Voucher's Status</ion-button>
+          </ng-container>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-footer>

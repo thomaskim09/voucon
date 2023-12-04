@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Clear App Cache</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content overflow-scroll='true'>
+  <form [formGroup]='form'>
+    <ion-grid class='grid'>
+      <ion-row>
+        <ion-col>
+          <ion-select class='select-box' placeholder="Cache Selection" formControlName='cacheKey'>
+            <ng-container *ngFor='let item of itemList'>
+              <ion-select-option [value]="item.value">{{item.name}}</ion-select-option>
+            </ng-container>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <form [formGroup]='form'>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button [disabled]='!form.valid' (click)='clearCache()' color="primary" expand="full" shape='round'>Clear
+            Cache</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-footer>

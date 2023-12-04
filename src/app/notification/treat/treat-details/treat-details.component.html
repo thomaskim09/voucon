@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Treats Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content overflow-scroll='true'>
+
+  <ng-container *ngIf='item'>
+    <ion-list>
+      <ion-item>
+        <ion-label>{{getDate(item.createdTime)}}</ion-label>
+        <ion-label class='end' slot="end">{{getFromNow(item.createdTime)}}</ion-label>
+      </ion-item>
+      <ion-item (click)='copyText(item.senderDetails.senderId)'>
+        <ion-label>{{item.senderDetails.senderId}}</ion-label>
+        <ion-label class='end' slot="end">{{item.senderDetails.senderType}}</ion-label>
+      </ion-item>
+      <ion-item (click)='copyText(item.details.email)'>
+        <div>{{item.details.email}}</div>
+      </ion-item>
+      <ion-item>
+        <div class='content'>{{item.details.content}}</div>
+      </ion-item>
+      <ion-item>
+        <div>{{item.details.paymentMethod}}</div>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{item.details.treatType}}</ion-label>
+        <ion-label class='end' slot="end">RM{{item.details.amount}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <div>{{getHideIdentity(item.details.isAnonymous)}}</div>
+      </ion-item>
+    </ion-list>
+  </ng-container>
+
+</ion-content>

@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Search Collections</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content overflow-scroll='true'>
+  <ion-grid class='grid'>
+    <form [formGroup]='form'>
+      <ion-row>
+        <ion-col>
+          <ion-select class='select-box' placeholder="Collection" formControlName='collection'>
+            <ng-container *ngFor='let item of typeList'>
+              <ion-select-option [value]="item.value">{{item.text}}</ion-select-option>
+            </ng-container>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-select class='select-box' placeholder="Type" formControlName="type">
+            <ion-select-option value="id">_id</ion-select-option>
+            <ion-select-option value="query">query</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="form.controls.type.value === 'id'">
+        <ion-col>
+          <ion-input class='input-box' placeholder="Object Id" formControlName="objectId"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="form.controls.type.value === 'query'">
+        <ion-col>
+          <ion-input class='input-box' placeholder="FindOne Query (Use Double Quote)" formControlName="query">
+          </ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf='jsonResult'>
+        <ion-col class='grey-box'>
+          <pre>
+          {{jsonResult | json}}
+        </pre>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-grid>
+    <form [formGroup]='form'>
+      <ion-row>
+        <ion-col>
+          <ion-button [disabled]='!form.valid' (click)='searchCollection()' color="primary" expand="full" shape='round'>
+            Search Collection</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
+</ion-footer>

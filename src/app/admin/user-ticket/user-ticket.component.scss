@@ -1,0 +1,30 @@
+@import '../../../theme/colors.scss';
+
+.grid {
+    margin: 1em 1em;
+}
+
+.select-box {
+    border-bottom: 1px solid $GREY_BORDER_LINE;
+    padding-left: 0.5em !important;
+}
+
+.number {
+    color: $GREY_TEXT_WHITE;
+}
+
+.left {
+    color: $GREY_TEXT_WHITE;
+    max-width: 40%;
+}
+
+.right {
+    float: right;
+    position: absolute;
+    right: 1.5em;
+    bottom: 0.3em;
+}
+
+.status {
+    color: $GREY_TEXT_WHITE;
+}

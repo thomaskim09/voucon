@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Set Up Rating</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content overflow-scroll='true'>
+
+  <ion-grid class='grid'>
+    <ion-row>
+      <ion-col>
+        <ion-select class='select-box' placeholder="Action" [(ngModel)]='type' (ngModelChange)='getPostList()'>
+          <ion-select-option value="recalculate">Recalculate rating</ion-select-option>
+          <ion-select-option value="update">Change rating</ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+
+    <ng-container *ngIf="type === 'recalculate'">
+      <ion-row>
+        <ion-col>
+          <ion-input class='input-box' placeholder="Start Date" [(ngModel)]='startDate' (ionFocus)='showStartPicker()'>
+          </ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input class='input-box' placeholder="End Date" [(ngModel)]='endDate' (ionFocus)='showEndPicker()'>
+          </ion-input>
+        </ion-col>
+      </ion-row>
+    </ng-container>
+
+    <ng-container *ngIf="type === 'update'">
+      <ion-row>
+        <ion-col>
+          <ionic-selectable class='select-box' placeholder="Pick a Restaurant" [(ngModel)]="resPort" [items]="resPorts"
+            itemValueField="id" itemTextField="name" [canSearch]="true" (onChange)="resPortChange($event)">
+          </ionic-selectable>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input class='input-box' type='number' placeholder="Rating" [(ngModel)]="rating"></ion-input>
+        </ion-col>
+      </ion-row>
+    </ng-container>
+
+    <ion-row *ngIf='jsonResult'>
+      <ion-col class='grey-box'>
+        <pre>
+        {{jsonResult | json}}
+      </pre>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>
+
+<ion-footer>
+  <ion-grid>
+    <ng-container *ngIf="type === 'recalculate'">
+      <ion-row>
+        <ion-col>
+          <ion-button (click)='recalculateRating()' color="primary" expand="full" shape='round'>Recaculate Rating
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ng-container>
+    <ng-container *ngIf="type === 'update'">
+      <ion-row>
+        <ion-col>
+          <ion-button (click)='updateRating()' color="secondary" expand="full" shape='round'>Update Restaurant's Rating
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ng-container>
+  </ion-grid>
+</ion-footer>

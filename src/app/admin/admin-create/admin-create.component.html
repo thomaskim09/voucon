@@ -1,0 +1,162 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create Or Modify Admin</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content overflow-scroll='true'>
+  <form [formGroup]='form'>
+    <ion-grid class='grid'>
+      <ion-row>
+        <ion-col>
+          <ion-select class='select-box' placeholder="Action" formControlName='action'>
+            <ion-select-option value="create">Create admin</ion-select-option>
+            <ion-select-option value="create_future">Create future admin</ion-select-option>
+            <ion-select-option value="update">Update admin</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <ng-container *ngIf="form.value.action === 'update'">
+        <ion-row>
+          <ion-col>
+            <ion-select class='select-box' placeholder="Update options" formControlName='updateType'>
+              <ion-select-option value="username">Update username</ion-select-option>
+              <ion-select-option value="password">Update password</ion-select-option>
+              <ion-select-option value="status">Update status</ion-select-option>
+              <ion-select-option value="subscription">Update subscription</ion-select-option>
+              <ion-select-option value="feature">Update feature</ion-select-option>
+              <ion-select-option value="company">Update company info</ion-select-option>
+              <ion-select-option value="bank">Update bank info</ion-select-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ionic-selectable class='select-box' placeholder="Pick a Restaurant" formControlName='adminId'
+              [items]="adminList" itemValueField="id" itemTextField="name" [canSearch]="true">
+            </ionic-selectable>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+    </ion-grid>
+
+    <ion-grid class='grid'>
+      <ion-row>
+        <ion-col>
+          <ion-input class='input-box' placeholder="Username" formControlName='username'></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input class='input-box' placeholder="Password" formControlName='password'></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-select class='select-box' placeholder="Status" formControlName='status'>
+            <ion-select-option value="OP">OP</ion-select-option>
+            <ion-select-option value="CL">CL</ion-select-option>
+            <ion-select-option value="HD">HD</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-select class='select-box' placeholder="Subscription" formControlName='subscription'>
+            <ion-select-option value="01">Bronze</ion-select-option>
+            <ion-select-option value="02">Gold</ion-select-option>
+            <ion-select-option value="03">Platinum</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-select class='select-box' placeholder="Feature" formControlName='feature'>
+            <ion-select-option value="1">Vouchers only</ion-select-option>
+            <ion-select-option value="3">Vouchers, Reservation, Orderings</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input class='input-box' placeholder="Company Name" formControlName='companyName'></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input class='input-box' placeholder="Registration No" formControlName='registrationNo'></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input class='input-box' placeholder="SST" formControlName='sstId'></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input class='input-box' placeholder="Contact" formControlName='contact'></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input class='input-box' placeholder="Email" formControlName='email'></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input class='input-box' placeholder="Address" formControlName='address'></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ionic-selectable class='select-box' placeholder="Bank's Type" formControlName='bankType'
+            [items]="bankTypeList" itemValueField="name" itemTextField="name" [canSearch]="true">
+          </ionic-selectable>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input class='input-box' placeholder="Bank account name" formControlName='bankAccountName'></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input class='input-box' placeholder="Bank account number" formControlName='bankAccountNumber'>
+          </ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <form [formGroup]='form'>
+    <ion-grid>
+      <ng-container *ngIf="form.controls.action.value === 'create'">
+        <ion-row>
+          <ion-col>
+            <ion-button [disabled]='!form.valid' (click)='createAdmin()' color="primary" expand="full" shape='round'>
+              Create Admin</ion-button>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+      <ng-container *ngIf="form.controls.action.value === 'create_future'">
+        <ion-row>
+          <ion-col>
+            <ion-button [disabled]='!form.valid' (click)='createFutureAdmin()' color="primary" expand="full"
+              shape='round'>
+              Create Future Admin</ion-button>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+      <ng-container *ngIf="form.controls.action.value === 'update'">
+        <ion-row>
+          <ion-col>
+            <ion-button [disabled]='!form.valid' (click)='updateAdmin()' color="secondary" expand="full" shape='round'>
+              Update Admin</ion-button>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+    </ion-grid>
+  </form>
+</ion-footer>

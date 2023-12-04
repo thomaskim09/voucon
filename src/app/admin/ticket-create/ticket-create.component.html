@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create Ticket</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content overflow-scroll='true'>
+  <form [formGroup]='form'>
+    <ion-grid class='grid'>
+      <ion-row>
+        <ion-col>
+          <ionic-selectable class='select-box' placeholder="Pick a User" formControlName='userId' [items]="usersList"
+            itemValueField="id" itemTextField="name" [canSearch]="true">
+          </ionic-selectable>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ionic-selectable class='select-box' placeholder="Pick a Restaurant" formControlName='restaurantId'
+            [items]="restaurantsList" itemValueField="id" itemTextField="name" [canSearch]="true">
+          </ionic-selectable>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ionic-selectable class='select-box' placeholder="Pick a Voucher" formControlName='voucherId'
+            [items]="vouchersList" itemValueField="id" itemTextField="name" [canSearch]="true">
+          </ionic-selectable>
+        </ion-col>
+      </ion-row>
+      <ng-container *ngIf='form.value.voucherId'>
+        <ion-row>
+          <ion-col>
+            <ion-select class='select-box' placeholder="Payment Method" formControlName='paymentMethod'>
+              <ion-select-option value="BOOST">Boost</ion-select-option>
+              <ion-select-option value="fpx">FPX</ion-select-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-input class='input-box' type='number' placeholder="Quantity" formControlName='quantity'></ion-input>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+    </ion-grid>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <form [formGroup]='form'>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button [disabled]='!form.valid' (click)='createTicket()' color="primary" expand="full" shape='round'>
+            Create Ticket</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-footer>

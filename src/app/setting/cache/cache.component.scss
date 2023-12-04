@@ -1,0 +1,10 @@
+@import '../../../theme/colors.scss';
+
+.grid {
+    margin: 1em 1em;
+}
+
+.select-box {
+    border-bottom: 1px solid $GREY_BORDER_LINE;
+    padding-left: 0.5em !important;
+}

@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Set Up Ads</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content overflow-scroll='true'>
+  <ion-grid class='grid'>
+    <form [formGroup]='form'>
+      <ion-row>
+        <ion-col>
+          <ion-select class='select-box' placeholder="Ads Type" formControlName='type'>
+            <ion-select-option value="tags">Tags</ion-select-option>
+            <ion-select-option value="restaurants">Restaurants</ion-select-option>
+            <ion-select-option value="vouchers">Vouchers</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+
+      <ng-container>
+        <ion-row *ngIf='needResPorts'>
+          <ion-col>
+            <ionic-selectable class='select-box' placeholder="Restaurant's Name" formControlName='restaurants'
+              [items]="resPorts" itemValueField="id" itemTextField="name" [canSearch]="true" [isMultiple]="true">
+            </ionic-selectable>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf='needVouPorts'>
+          <ion-col>
+            <ionic-selectable class='select-box' placeholder="Voucher's Name" formControlName='vouchers'
+              [items]="vouPorts" itemValueField="id" itemTextField="name" [canSearch]="true" [isMultiple]="true">
+            </ionic-selectable>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf='needTypePorts'>
+          <ion-col>
+            <ionic-selectable class='select-box' placeholder="Restaurant's Type" formControlName='restaurantTypes'
+              [items]="typePorts" itemValueField="id" itemTextField="name" [canSearch]="true" [isMultiple]="true">
+            </ionic-selectable>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf='needFoodPorts'>
+          <ion-col>
+            <ionic-selectable class='select-box' placeholder="Food's Tag" formControlName='foodTypes'
+              [items]="foodPorts" itemValueField="id" itemTextField="name" [canSearch]="true" [isMultiple]="true">
+            </ionic-selectable>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf='needAreaPorts'>
+          <ion-col>
+            <ionic-selectable class='select-box' placeholder="Areas" formControlName='areas' [items]="areaPorts"
+              itemValueField="id" itemTextField="name" [canSearch]="true" [isMultiple]="true">
+            </ionic-selectable>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf='needPlacePorts'>
+          <ion-col>
+            <ionic-selectable class='select-box' placeholder="Places" formControlName='places' [items]="placePorts"
+              itemValueField="id" itemTextField="name" [canSearch]="true" [isMultiple]="true">
+            </ionic-selectable>
+          </ion-col>
+        </ion-row>
+
+        <ng-container *ngIf='displayList && displayList.length'>
+          <ion-row class='frame'>
+            <ion-col>
+              <ion-row *ngFor='let item of displayList'>
+                <ion-col>
+                  {{item}}
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ng-container>
+
+      </ng-container>
+    </form>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <form [formGroup]='form'>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button [disabled]='!form.valid' (click)='updateAds()' color="primary" expand="full" shape='round'> Update
+            Ads</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-footer>

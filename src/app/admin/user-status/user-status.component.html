@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Control User Status</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content overflow-scroll='true'>
+  <ion-grid class='grid'>
+    <ion-row>
+      <ion-col>
+        <ionic-selectable class='select-box' placeholder="Pick a user" [(ngModel)]="userPort" [items]="userPorts"
+          itemValueField="id" itemTextField="name" [canSearch]="true" (onChange)="userPortChange($event)">
+        </ionic-selectable>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-select class='select-box' placeholder="Status" [(ngModel)]="status">
+          <ion-select-option value="OP">Open - OP</ion-select-option>
+          <ion-select-option value="CL">Close - CL</ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button [disabled]='!status' (click)='updateStatus()' color="primary" expand="full" shape='round'>Update
+          Status</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

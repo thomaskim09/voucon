@@ -1,6 +1,8 @@
 {
   "name": "Voucon",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "c72d673b"
 }

@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Generate Invoice</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content overflow-scroll='true'>
+
+  <ion-grid class='grid'>
+    <ion-row>
+      <ion-col>
+        <ionic-selectable class='select-box' placeholder="Restaurant's name" [(ngModel)]="resPort" [items]="resPorts"
+          itemValueField="id" itemTextField="name" [canSearch]="true" (onChange)="resPortChange($event)">
+        </ionic-selectable>
+      </ion-col>
+    </ion-row>
+    <form [formGroup]='form'>
+      <ion-row>
+        <ion-col>
+          <ion-select class='select-box' placeholder="Duration" formControlName='duration'>
+            <ion-select-option value="CM">Current Month</ion-select-option>
+            <ion-select-option value="LM">Last Month</ion-select-option>
+            <ion-select-option value="2M">Last 2 Months</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input class='input-box' placeholder="Start Date" formControlName='startDate'
+            (ionFocus)='showStartPicker()'></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input class='input-box' placeholder="End Date" formControlName='endDate' (ionFocus)='showEndPicker()'>
+          </ion-input>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
+
+  <ng-container *ngIf='bill'>
+    <app-bill-format [bill]='bill'></app-bill-format>
+  </ng-container>
+
+</ion-content>
+
+<ion-footer>
+  <form [formGroup]='form'>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button [disabled]='!form.valid || !resPort' (click)='previewBill()' color="secondary" expand="full"
+            shape='round'>Preview Bill</ion-button>
+        </ion-col>
+      </ion-row>
+      <ng-container *ngIf='bill'>
+        <ion-row>
+          <ion-col>
+            <ion-button [disabled]='!form.valid && !resPort && !bill' (click)='generatePDF()' color="primary"
+              expand="full" shape='round'>Generate Bill PDF</ion-button>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+    </ion-grid>
+  </form>
+</ion-footer>

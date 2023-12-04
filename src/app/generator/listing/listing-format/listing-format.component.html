@@ -1,0 +1,107 @@
+<ion-content overflow-scroll='true' padding>
+  <div class="printable-content">
+    <div class="printable-area" id="printable-area">
+      <ion-grid>
+
+        <ion-row>
+          <ion-col>
+            <img src="../../../../assets/imgs/logo.png" alt="logo">
+          </ion-col>
+        </ion-row>
+
+        <ion-row class='header-content'>
+          <ion-col class='primary' size='2'>
+            <ion-row>
+              <ion-col class='bill-to-col'>Bill To</ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col size='6'>
+            <ion-row>
+              <ion-col class='primary'>{{input.companyName}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class='tertiary'>{{input.registrationNo}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class='tertiary'>{{input.companyContact}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class='tertiary'>{{input.address}}</ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col size='4'>
+            <ion-row>
+              <ion-col class='title-col'>INVOICE</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class='tertiary'>Invoice No: {{getInvoiceNo(input.invoiceNo, 6)}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class='tertiary'>Start Date: {{input.startDate}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class='tertiary'>End Date: {{input.endDate}}</ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class='header-row'>
+          <ion-col class='header-col' size='8'>Name</ion-col>
+          <ion-col class='header-col' size='4'>Price</ion-col>
+        </ion-row>
+        <ion-row class="content-row">
+          <ion-col class='content-col' size='8'>Listing Fee</ion-col>
+          <ion-col class='content-col' size='4'>RM {{input.listingFee}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size='8'>
+            <ion-row>
+              <ion-col>
+                <ion-row>
+                  <ion-col class='secondary upper' size='12'>RINGGIT MALAYSIA: {{inWords(input.listingFee)}}</ion-col>
+                </ion-row>
+
+                <ion-row>
+                  <ion-col class='primary note-col'>Notes</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col class='tertiary' size='10'>
+                    <ul class='list'>
+                      <li>
+                        All cheques should be crossed and made payable to <br>
+                        <span class='upper'>{{input.bankAccountName}}</span> ({{input.bankType }}) -
+                        {{input.bankAccountNumber}}
+                      </li>
+                      <li>
+                        Please send the bank in slip to our whatsapp ({{input.contact}}) or email to us
+                        ({{input.email}})
+                      </li>
+                      <li>
+                        Please send payment within 7 days of receiving this invoice.
+                      </li>
+                    </ul>
+                  </ion-col>
+                </ion-row>
+
+                <ion-row>
+                  <ion-col class='tertiary' size='10'>This Invoice is computer generated. No Signature is required.
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col class='title-secondary'>Thank you for your business</ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col size='4' class='total-content'>
+            <ion-row class='total-row'>
+              <ion-col class='total-col'>Total</ion-col>
+              <ion-col class='total-col'>RM {{input.listingFee}}</ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+    </div>
+  </div>
+</ion-content>

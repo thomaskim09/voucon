@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Link Unlink Menu</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content overflow-scroll='true'>
+  <form [formGroup]='form'>
+    <ion-grid class='grid'>
+      <ion-row>
+        <ion-col>
+          <ion-select class='select-box' placeholder="Action" formControlName='action'>
+            <ion-select-option value="create">Link Menu</ion-select-option>
+            <ion-select-option value="unlink">Unlink Menu</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ionic-selectable class='select-box' placeholder="Pick a Restaurant's Menu" formControlName='restaurantId'
+            [items]="restaurantList" itemValueField="id" itemTextField="name" [canSearch]="true">
+          </ionic-selectable>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="form.value.action === 'create'">
+        <ion-col>
+          <ionic-selectable class='select-box' placeholder="Restaurant List" formControlName='restaurantList'
+            [items]="restaurantList" [isMultiple]="true" itemValueField="id" itemTextField="name" [canSearch]="true">
+          </ionic-selectable>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <form [formGroup]='form'>
+    <ion-grid>
+      <ng-container *ngIf="form.value.action === 'create'">
+        <ion-row>
+          <ion-col>
+            <ion-button [disabled]='!form.valid' (click)='linkMenu()' color="primary" expand="full" shape='round'>
+              Link Menu</ion-button>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+      <ng-container *ngIf="form.value.action === 'unlink'">
+        <ion-row>
+          <ion-col>
+            <ion-button [disabled]='!form.valid' (click)='unlinkMenu()' color="secondary" expand="full" shape='round'>
+              Unlink Menu</ion-button>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+    </ion-grid>
+  </form>
+</ion-footer>

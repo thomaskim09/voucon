@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Generate Order QR Code</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content overflow-scroll='true'>
+  <form [formGroup]='form'>
+    <ion-grid class='grid'>
+      <ion-row>
+        <ion-col>
+          <ionic-selectable class='select-box' placeholder="Restaurant's name" formControlName='restaurantId'
+            [items]="resPorts" itemValueField="id" itemTextField="name" [canSearch]="true">
+          </ionic-selectable>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-select class='select-box' placeholder="Website" formControlName='website'>
+            <ion-select-option value="https://pwa.vouchy.com.my/#/order">PWA</ion-select-option>
+            <ion-select-option value="https://list.vouchy.com.my/#/home">List</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+  <ng-container *ngIf='QRText'>
+    <ion-grid class='grid'>
+      <ion-row>
+        <ion-col class='grey-box'>{{QRText}}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-container>
+</ion-content>
+
+<ion-footer>
+  <form [formGroup]='form'>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)='copyQR()' color="primary" expand="full" shape='round'>Copy QR
+            Text</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-footer>

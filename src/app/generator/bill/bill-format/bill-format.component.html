@@ -1,0 +1,89 @@
+<ion-content overflow-scroll='true' padding>
+  <div class="printable-content">
+    <div class="printable-area" id="printable-area">
+      <ion-grid>
+
+        <ion-row>
+          <ion-col>
+            <img src="../../../../assets/imgs/logo.png" alt="logo">
+          </ion-col>
+        </ion-row>
+
+        <ion-row class='header-content'>
+          <ion-col class='primary' size='2'>
+            <ion-row>
+              <ion-col class='bill-to-col'>Bill To</ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col size='6'>
+            <ion-row>
+              <ion-col class='primary'>{{com.companyName}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class='tertiary'>{{com.registrationNo}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class='tertiary'>{{com.contact}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class='tertiary'>{{com.address}}</ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col size='4'>
+            <ion-row>
+              <ion-col class='title-col'>INVOICE</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class='tertiary'>Start Date: {{bill.startDate}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class='tertiary'>End Date: {{bill.endDate}}</ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class='header-row'>
+          <ion-col class='header-col' size='6'>Voucher's name</ion-col>
+          <ion-col class='header-col' size='2'>Price</ion-col>
+          <ion-col class='header-col' size='2'>Qty</ion-col>
+          <ion-col class='header-col' size='2'>Total</ion-col>
+        </ion-row>
+        <ng-container *ngFor='let item of bill.filteredDetails; let i=index'>
+          <ion-row [ngClass]="{'content-row': getEven(i), 'content-row2': !getEven(i)}">
+            <ion-col class='content-col' size='6'>{{item.voucherName}}</ion-col>
+            <ion-col class='content-col' size='2'>RM {{item.pricePerUnit}}</ion-col>
+            <ion-col class='content-col' size='2'>{{item.quantity}}</ion-col>
+            <ion-col class='content-col2' size='2'>RM {{item.subtotalText}}</ion-col>
+          </ion-row>
+        </ng-container>
+
+        <ion-row>
+          <ion-col size='8'>
+            <ion-row>
+              <ion-col>
+                <ion-row>
+                  <ion-col class='title-secondary'>Thank you for your business</ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col size='4'>
+            <ion-row>
+              <ion-col class='secondary-col'>Subtotal</ion-col>
+              <ion-col class='secondary-col'>RM {{bill.subtotal}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class='primary-col'>Service Fee:</ion-col>
+              <ion-col class='primary-col'>RM {{bill.commission}}</ion-col>
+            </ion-row>
+            <ion-row class='total-row'>
+              <ion-col class='total-col'>Total</ion-col>
+              <ion-col class='total-col'>RM {{bill.total}}</ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+    </div>
+  </div>
+</ion-content>

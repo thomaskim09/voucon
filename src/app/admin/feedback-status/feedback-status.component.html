@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Change feedback status</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content overflow-scroll='true'>
+  <form [formGroup]='form'>
+    <ion-grid class='grid'>
+      <ion-row>
+        <ion-col>
+          <ionic-selectable class='select-box' placeholder="Restaurant's name" formControlName='adminId'
+            [items]="adminList" itemValueField="id" itemTextField="name" [canSearch]="true">
+          </ionic-selectable>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ionic-selectable class='select-box' placeholder="Feedback List" formControlName='feedbackId'
+            [items]="feedbackList" itemValueField="id" itemTextField="name" [canSearch]="true">
+          </ionic-selectable>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-select class='select-box' placeholder="Status" formControlName='status'>
+            <ion-select-option value="OP">Open - OP</ion-select-option>
+            <ion-select-option value="CL">Close - CL</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-row *ngIf='content'>
+            <ion-col class='grey-box'>
+              {{content}}
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <form [formGroup]='form'>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)='updateFeedbackStatus()' color="primary" expand="full" shape='round'
+            [disabled]='!form.valid'>Update Status</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-footer>

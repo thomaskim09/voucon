@@ -1,0 +1,137 @@
+@import '../../../../theme/colors.scss';
+
+ion-content {
+    background-color: #c0c0ff;
+
+    .printable-content {
+        margin: 16px;
+        overflow-x: scroll;
+        overflow-y: scroll;
+        background-color: #ffffff;
+
+        .printable-area {
+            height: 1200px;
+            width: 857px;
+            // height: 540px;
+            // width: 595px;
+
+            .primary {
+                font-weight: bold;
+                padding: 0.7em 0.7em 0.2em 0.7em;
+            }
+
+            .secondary {
+                color: $GREY_TEXT_WHITE;
+                padding: 0.3em 0.7em;
+            }
+
+            .tertiary {
+                font-size: 0.9em;
+                color: $GREY_TEXT_WHITE;
+                padding: 0.3em 0.8em;
+            }
+
+            .upper {
+                text-transform: uppercase;
+            }
+
+            .list {
+                padding-left: 1.2em;
+                margin-top: 0em;
+            }
+
+            .primary-col {
+                font-weight: bold;
+                padding: 0.7em;
+                background-color: $GRADIENT_LIGHT;
+            }
+
+            .secondary-col {
+                padding: 0.7em;
+            }
+
+            .header-content {
+                margin-bottom: 1em;
+            }
+
+            .bill-to-col {
+                border-left: 4px solid $GRADIENT_TOP;
+            }
+
+            .title-col {
+                font-size: 2em;
+                background-color: $GRADIENT_TOP;
+                color: white;
+                text-transform: uppercase;
+                padding-left: 0.7em;
+                margin-bottom: 0.4em;
+            }
+
+            .header-row {
+                background-color: $GRADIENT_TOP;
+                color: white;
+                text-transform: uppercase;
+                border-right: 1px solid $GRADIENT_LIGHT_DARKER;
+                border-left: 1px solid $GRADIENT_LIGHT_DARKER;
+            }
+
+            .header-col {
+                border: 1px solid $GRADIENT_LIGHT_DARKER;
+                padding: 0.7em;
+            }
+
+            .note-col {
+                margin-top: 1em;
+            }
+
+            .content-row {
+                font-weight: 400;
+                border-right: 1px solid $GRADIENT_LIGHT_DARKER;
+                border-left: 1px solid $GRADIENT_LIGHT_DARKER;
+            }
+
+            .content-row2 {
+                font-weight: 400;
+                background-color: $GRADIENT_LIGHT;
+                border-right: 1px solid $GRADIENT_LIGHT_DARKER;
+                border-left: 1px solid $GRADIENT_LIGHT_DARKER;
+            }
+
+            .content-col {
+                border-right: 1px solid $GRADIENT_LIGHT_DARKER;
+                border-bottom: 1px solid $GRADIENT_LIGHT_DARKER;
+                padding: 0.7em;
+            }
+
+            .content-col2 {
+                border-bottom: 1px solid $GRADIENT_LIGHT_DARKER;
+                padding: 0.7em;
+            }
+
+            .total-content {
+                padding: 0;
+            }
+
+            .total-row {
+                background-color: $GRADIENT_TOP;
+                color: white;
+                text-transform: uppercase;
+                font-size: 1.3em;
+                font-weight: bold;
+            }
+
+            .total-col {
+                border: 1px solid $GRADIENT_LIGHT_DARKER;
+                padding: 0.7em 0.5em;
+            }
+
+            .title-secondary {
+                color: $GREY_TEXT_WHITE;
+                text-transform: uppercase;
+                font-size: 1.2em;
+                margin-top: 0.5em;
+                padding: 0.5em;
+            }
+        }
+    }
+}
